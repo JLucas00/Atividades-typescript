@@ -1,0 +1,263 @@
+API Bancária com Typescript:
+  MVP:
+    ✔ Planejamento (TODO) @done(22-06-25 14:32)
+    Configuração do projeto:
+      Estrutura de diretórios:
+        ✔ clients/dao/postgres @done(22-06-25 14:32)
+        ✔ config @done(22-06-25 14:32)
+        ✔ controllers @done(22-06-25 14:32)
+        ✔ models @done(22-06-25 14:32)
+        ✔ routes @done(22-06-25 14:32)
+        ✔ services @done(22-06-25 14:32)
+        ✔ utils @done(22-06-25 14:32)
+        ✔ validators @done(22-06-25 14:32)
+      Instalação das dependencias:
+        dependencias de produção:
+          ✔ dotenv @done(22-06-25 14:36)
+          ✔ express @done(22-06-25 14:37)
+          ✔ pg @done(22-06-25 14:38)
+          ✔ uuid @done(22-06-25 14:40)
+        dependencias de desenvolvimento:
+          ✔ @types/dotenv @done(22-06-25 14:48)
+          ✔ @types/express @done(22-06-25 14:48)
+          ✔ @types/node @done(22-06-25 14:48)
+          ✔ @types/pg @done(22-06-25 14:48)
+          ✔ @types/uuid @done(22-06-25 14:48)
+          ✔ typescript @done(22-06-25 14:53)
+          ✔ ts-node-dev @done(22-06-25 14:53)
+          ✔ eslint @done(22-06-25 14:53)
+      ✔ criação do .gitignore @done(22-06-25 14:54)
+      ✔ Typescript configuração @done(22-06-25 14:55)
+      ✔ Eslint Configuração @done(22-06-25 15:05)
+      ✔ Criação dos scripts do package.json @done(22-06-25 16:02)
+      ✔ Repositório remoto @done(22-06-25 16:02)
+      ✔ Variáveis de ambiente @done(22-06-25 16:02)
+    Codificação:
+      models:
+        ✔ response @done(22-06-25 18:14)
+        ✔ user @done(22-06-25 18:14)
+        ✔ account @done(22-06-25 18:14)
+        ✔ transaction @done(22-06-25 18:14)
+      controllers:
+        ☐ create-account
+        ☐ get-extract
+        ☐ create-deposit
+        ☐ create-transfer
+        ☐ create-draft
+      services:
+        ☐ create-account
+        ☐ get-extract
+        ☐ create-deposit
+        ☐ create-transfer
+        ☐ create-draft
+      validators:
+        user:
+          ✔ name @done(22-06-26 16:41)
+          ✔ birtdate @done(22-06-25 22:03)
+          ✔ document (cpf) @done(22-06-25 22:02)
+          ✔ accountPassword @done(22-06-25 22:03)
+        account:
+          ✔ agencyNumber @done(22-06-25 22:03)
+          ✔ agencyVerificationCode @done(22-06-26 16:42)
+          ✔ accountNumber @done(22-06-26 16:42)
+          ✔ accountVerificationCode @done(22-06-26 16:42)
+        transaction:
+          ✔ type (para validar se é transfer | draft | deposit) @done(22-06-26 17:00)
+          ✔ value (tem que ser um número de não pode ser negativo quando vem pelo body) @done(22-06-26 17:14)
+      config:
+        ✔ basicamente arquivo index.ts q exporta as variáveis de ambiente para centralizar seu acesso @done(22-06-25 18:14)
+      utils:
+        ✔ response-writer @done(22-06-26 16:43)
+        ✔ exception-treatment @done(22-06-26 16:43)
+      clients/dao/postgres:
+        ✔ users @done(22-06-26 19:26)
+        ✔ accounts @done(22-06-26 19:26)
+        ✔ transactions @done(22-06-26 19:26)
+    Modelagem Tabelas:
+      Users:
+        ✔ id @done(22-06-25 21:16)
+        ✔ name @done(22-06-25 21:16)
+        ✔ birthdate @done(22-06-25 21:16)
+        ✔ document @done(22-06-25 21:16)
+      Accounts:
+        ✔ id @done(22-06-25 21:16)
+        ✔ user_id @done(22-06-25 21:16)
+        ✔ agencyNumber @done(22-06-25 21:16)
+        ✔ agencyVerificationCode @done(22-06-25 21:16)
+        ✔ accountNumber @done(22-06-25 21:16)
+        ✔ accountVerificationCode @done(22-06-25 21:16)
+        ✔ balance @done(22-06-25 21:16)
+      Transactions:
+        ✔ id @done(22-06-25 21:16)
+        ✔ origin_account_id (nulo se for um deposito) @done(22-06-25 21:16)
+        ✔ destination_account_id (nulo se for um saque) @done(22-06-25 21:16)
+        ✔ date @done(22-06-25 21:16)
+        ✔ value @done(22-06-25 21:16)
+        ✔ type @done(22-06-25 21:16)
+    Insominia:
+      ☐ configurar ambientes e variáveis
+      endpoints:
+        Get extrated (GET):
+          ☐ URL /extract
+          QUERYS STRINGS (filters):
+            ☐ agencyNumber
+            ☐ agencyVerificationCode
+            ☐ accountNumber
+            ☐ accountVerificationCode
+            ☐ document
+          ☐ RESPONSE: {
+            "data": {
+              "agencyNumber": 4570,
+              "agencyVerificationCode": 8,
+              "accountNumber": 985684,
+              "accountVerificationCode": 7,
+              "owner": 'Anderson,
+              "document": "76763008007",
+              "birthdate": 4570,
+              "balance": 23000.22,
+              "transactions": {
+                "transactionId": "",
+                "type": "transfer"
+                "value": -30,
+                "date": ""
+              }
+            },
+            "messages": null
+          }
+        Make deposit (POST):
+          ☐ URL /desposit
+          ☐ BODY: {
+            "account": {
+              "agencyNumber": 4570,
+              "agencyVerificationCode": 8,
+              "accountNumber": 985684,
+              "accountVerificationCode": 7,
+              "document": "76763008007"
+            }
+            "value": 123.45
+          }
+          ☐ RESPONSE: {
+            "data": {
+              "transactionId": "",
+              "type": "deposit",
+              "value": 15.51,
+              "date": "",
+              "account": {
+                "agencyNumber": 4570,
+                "agencyVerificationCode": 8,
+                "accountNumber": 985684,
+                "accountVerificationCode": 7,
+                "owner": "Anderson",
+                "document": "76763008007"
+              }
+            },
+            "messages": null
+          }
+        Make transfer (POST):
+          ☐ URL /transfer
+          ☐ BODY: {
+            "originAccount": {
+              "agencyNumber": 4570,
+              "agencyVerificationCode": 8,
+              "accountNumber": 985684,
+              "accountVerificationCode": 7,
+              "document": "76763008007",
+              "accountPassword": "2222"
+            },
+            "destinationAccount": {
+              "agencyNumber": 4570,
+              "agencyVerificationCode": 8,
+              "accountNumber": 985684,
+              "accountVerificationCode": 7,
+              "document": "76763008007"
+            },
+            "value": 15.51
+          }
+          ☐ RESPONSE: {
+            "data": {
+              "transactionId": "",
+              "type": "transfer",
+              "value": 15.51,
+              "date": "",
+              "originAccount": {
+                "agencyNumber": 4570,
+                "agencyVerificationCode": 8,
+                "accountNumber": 985684,
+                "accountVerificationCode": 7,
+                "document": "76763008007"
+              },
+              "destinationAccount": {
+                "agencyNumber": 4570,
+                "agencyVerificationCode": 8,
+                "accountNumber": 985684,
+                "accountVerificationCode": 7,
+                "document": "76763008007"
+              },
+            },
+            "messages": null
+          }
+        Make draft (POST):
+          ☐ URL /draft
+          ☐ BODY: {
+            "account": {
+              "agencyNumber": 4570,
+              "agencyVerificationCode": 8,
+              "accountNumber": 985684,
+              "accountVerificationCode": 7,
+              "document": "76763008007",
+              "accountPassword": "2222"
+            }
+            "value": 123.45
+          }
+          ☐ RESPONSE: {
+            "data": {
+              "transactionId": "",
+              "type": "draft",
+              "value": 15.51,
+              "date": "",
+              "account": {
+                "agencyNumber": 4570,
+                "agencyVerificationCode": 8,
+                "accountNumber": 985684,
+                "accountVerificationCode": 7,
+                "owner": "Anderson",
+                "document": "76763008007"
+              }
+            },
+            "messages": null
+          }
+        Create account (POST):
+          ☐ URL /create-account
+          ☐ BODY: {
+            "name": "Anderson Ferreira Alves",
+            "document": "76763008007",
+            "birthdate": "1995-01-31",
+            "accountPassword": "2222"
+          }
+          ☐ RESPONSE: {
+            "data": {
+              "agencyNumber": 4570,
+              "agencyVerificationCode": 8,
+              "accountNumber": 985684,
+              "accountVerificationCode": 7,
+              "owner": "Anderson",
+              "document": "76763008007",
+              "birthdate": 4570
+            },
+            "messages": null
+          }
+  Extras:
+    Uso de transactions:
+      ☐ criação da conta e do usuário
+      ☐ criação de depositos e suas taxas
+      ☐ criação de saques e suas taxas
+    Controle de sessão:
+      ☐ autenticação
+      ☐ autorização
+    Documentação:
+        ☐ Readme.md
+    Docker:
+      docker compose:
+        ☐ imagem do nginx
+        ☐ imagem do node com o projeto
+        ☐ imagem do postgres
